@@ -1,0 +1,1527 @@
+type: sections
+title: Stazione Meteo Esterna
+path: stazione-meteo-esterna
+icon: mdi:weather-cloudy
+max_columns: 2
+dense_section_placement: false
+sections:
+  - type: grid
+    icon: mdi:view-dashboard
+    columns: 2
+    square: false
+    cards:
+      - type: heading
+        heading: Condizioni Attuali
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_temperatura
+            name: Temperatura (SHT31)
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#2196F3'
+            from: -20
+            to: 10
+          - color: '#4CAF50'
+            from: 10
+            to: 30
+          - color: '#FF9800'
+            from: 30
+            to: 38
+          - color: '#F44336'
+            from: 38
+            to: 50
+        min: -20
+        max: 50
+        height: 30px
+        icon: mdi:thermometer
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_umidita_relativa
+            name: Umidità
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#FFEB3B'
+            from: 0
+            to: 30
+          - color: '#4CAF50'
+            from: 30
+            to: 70
+          - color: '#2196F3'
+            from: 70
+            to: 90
+          - color: '#F44336'
+            from: 90
+            to: 100
+        min: 0
+        max: 100
+        height: 30px
+        icon: mdi:water-percent
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_pressione_atmosferica
+            name: Pressione
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#F44336'
+            from: 950
+            to: 970
+          - color: '#FF9800'
+            from: 970
+            to: 990
+          - color: '#4CAF50'
+            from: 990
+            to: 1025
+          - color: '#FF9800'
+            from: 1025
+            to: 1050
+        min: 950
+        max: 1050
+        height: 30px
+        icon: mdi:gauge
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_velocita_vento_km_h
+            name: Vento
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 0
+            to: 19.4
+          - color: '#FFEB3B'
+            from: 19.4
+            to: 49.7
+          - color: '#FF9800'
+            from: 49.7
+            to: 87.8
+          - color: '#F44336'
+            from: 87.8
+            to: 120
+        min: 0
+        max: 120
+        height: 30px
+        icon: mdi:weather-windy
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_heading_gradi
+            name: Direzione
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 359
+        height: 30px
+        icon: mdi:compass
+        target: 270
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_illuminanza
+            name: Illuminanza
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 200000
+        height: 30px
+        icon: mdi:brightness-5
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_indice_uv
+            name: Indice UV
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 0
+            to: 2
+          - color: '#FFEB3B'
+            from: 2
+            to: 5
+          - color: '#FF9800'
+            from: 5
+            to: 7
+          - color: '#F44336'
+            from: 7
+            to: 10
+          - color: '#9C27B0'
+            from: 10
+            to: 12
+        min: 0
+        max: 12
+        height: 30px
+        icon: mdi:sunglasses
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_beaufort_nome
+        name: Scala Beaufort
+        icon: mdi:windsock
+        layout: horizontal
+  - type: grid
+    icon: mdi:chart-timeline-variant
+    columns: 2
+    square: false
+    cards:
+      - type: heading
+        heading: Andamenti Ultime 24 Ore
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_temperatura
+            name: SHT31 Outdoor
+          - entity: sensor.stazione_meteo_esterna_temperatura_modulo_bme
+            name: BME280 Interno
+          - entity: sensor.stazione_meteo_esterna_sht31_punto_rugiada
+            name: SHT31 Punto Rugiada
+          - entity: sensor.stazione_meteo_esterna_sht31_wet_bulb
+            name: SHT31 Wet Bulb
+        name: Temperature (SHT31 + BME + Indici)
+        icon: mdi:thermometer
+        hours_to_show: 24
+        points_per_hour: 6
+        line_width: 2
+        animate: true
+        show:
+          legend: true
+          fill: fade
+          extrema: true
+          labels: false
+          name: true
+          icon: true
+          state: true
+        color_thresholds:
+          - value: 0
+            color: '#2196F3'
+          - value: 10
+            color: '#4CAF50'
+          - value: 30
+            color: '#FF9800'
+          - value: 38
+            color: '#F44336'
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_umidita_relativa
+            name: BME RH %
+          - entity: sensor.stazione_meteo_esterna_sht31_umidita_relativa
+            name: SHT31 RH %
+          - entity: sensor.stazione_meteo_esterna_sht31_umidita_assoluta
+            name: SHT31 g/m³
+            y_axis: secondary
+        name: Umidità BME vs SHT31
+        icon: mdi:water-percent
+        hours_to_show: 24
+        points_per_hour: 6
+        line_width: 2
+        animate: true
+        show:
+          legend: true
+          fill: fade
+          extrema: true
+          labels: false
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_punto_di_rugiada
+            name: BME Rugiada
+          - entity: sensor.stazione_meteo_esterna_sht31_punto_rugiada
+            name: SHT31 Rugiada
+          - entity: sensor.stazione_meteo_esterna_sht31_punto_brina
+            name: SHT31 Brina
+        name: Punto di Rugiada / Brina
+        icon: mdi:coolant-temperature
+        hours_to_show: 24
+        points_per_hour: 6
+        line_width: 2
+        animate: true
+        show:
+          legend: true
+          fill: fade
+          extrema: true
+          labels: false
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_heat_index
+            name: Heat Idx BME
+          - entity: sensor.stazione_meteo_esterna_sht31_heat_index
+            name: Heat Idx SHT31
+          - entity: sensor.stazione_meteo_esterna_humidex
+            name: Humidex BME
+          - entity: sensor.stazione_meteo_esterna_sht31_humidex
+            name: Humidex SHT31
+        name: Indici Termici Conforto
+        icon: mdi:sun-thermometer
+        hours_to_show: 24
+        points_per_hour: 6
+        line_width: 2
+        animate: true
+        show:
+          legend: true
+          fill: fade
+          extrema: true
+          labels: false
+        color_thresholds:
+          - value: 27
+            color: '#4CAF50'
+          - value: 33
+            color: '#FFEB3B'
+          - value: 41
+            color: '#FF9800'
+          - value: 54
+            color: '#F44336'
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_pressione_atmosferica
+            name: hPa
+        name: Pressione Atmosferica
+        icon: mdi:gauge
+        hours_to_show: 24
+        points_per_hour: 6
+        line_width: 2
+        animate: true
+        show:
+          legend: true
+          fill: fade
+          extrema: true
+          labels: false
+        color_thresholds:
+          - value: 970
+            color: '#F44336'
+          - value: 990
+            color: '#FF9800'
+          - value: 1020
+            color: '#4CAF50'
+          - value: 1040
+            color: '#2196F3'
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_velocita_vento_km_h
+            name: km/h
+        name: Velocità Vento
+        icon: mdi:weather-windy
+        hours_to_show: 24
+        points_per_hour: 12
+        line_width: 2
+        animate: true
+        show:
+          legend: true
+          fill: fade
+          extrema: true
+          labels: false
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_illuminanza
+            name: Lux
+        name: Illuminanza
+        icon: mdi:brightness-5
+        hours_to_show: 24
+        points_per_hour: 6
+        line_width: 2
+        animate: true
+        show:
+          legend: true
+          fill: fade
+          extrema: true
+          labels: false
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_indice_uv
+            name: UVI
+        name: Indice UV (scala OMS)
+        icon: mdi:sunglasses
+        hours_to_show: 24
+        points_per_hour: 6
+        line_width: 2
+        animate: true
+        show:
+          legend: true
+          fill: fade
+          extrema: true
+          labels: false
+        color_thresholds:
+          - value: 3
+            color: '#4CAF50'
+          - value: 6
+            color: '#FFEB3B'
+          - value: 8
+            color: '#FF9800'
+          - value: 11
+            color: '#F44336'
+          - value: 12
+            color: '#9C27B0'
+  - type: grid
+    icon: mdi:thermometer
+    columns: 3
+    square: false
+    cards:
+      - type: heading
+        heading: Temperatura & Comfort
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_temperatura_modulo_bme
+            name: BME280
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#2196F3'
+            from: -20
+            to: 10
+          - color: '#4CAF50'
+            from: 10
+            to: 30
+          - color: '#FF9800'
+            from: 30
+            to: 38
+          - color: '#F44336'
+            from: 38
+            to: 50
+        min: -20
+        max: 50
+        height: 34px
+        icon: mdi:thermometer-snowflake
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_temperatura
+            name: SHT31
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#2196F3'
+            from: -20
+            to: 10
+          - color: '#4CAF50'
+            from: 10
+            to: 30
+          - color: '#FF9800'
+            from: 30
+            to: 38
+          - color: '#F44336'
+            from: 38
+            to: 50
+        min: -20
+        max: 50
+        height: 34px
+        icon: mdi:thermometer-water
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_wet_bulb
+            name: Wet Bulb (SHT31)
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: -20
+        max: 50
+        height: 34px
+        icon: mdi:air-humidifier
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_apparent_temperature
+            name: Percepita
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: -20
+        max: 50
+        height: 34px
+        icon: mdi:thermometer-lines
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_heat_index
+            name: Heat Index
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 20
+            to: 32
+          - color: '#FFEB3B'
+            from: 32
+            to: 41
+          - color: '#FF9800'
+            from: 41
+            to: 54
+          - color: '#F44336'
+            from: 54
+            to: 60
+        min: 20
+        max: 60
+        height: 34px
+        icon: mdi:sun-thermometer
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_humidex
+            name: Humidex
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 0
+            to: 30
+          - color: '#FFEB3B'
+            from: 30
+            to: 40
+          - color: '#FF9800'
+            from: 40
+            to: 46
+          - color: '#F44336'
+            from: 46
+            to: 60
+        min: 0
+        max: 60
+        height: 34px
+        icon: mdi:water-thermometer
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_heat_index
+            name: SHT31 Heat Idx
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 20
+            to: 32
+          - color: '#FFEB3B'
+            from: 32
+            to: 41
+          - color: '#FF9800'
+            from: 41
+            to: 54
+          - color: '#F44336'
+            from: 54
+            to: 60
+        min: 20
+        max: 60
+        height: 34px
+        icon: mdi:sun-thermometer-outline
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_humidex
+            name: SHT31 Humidex
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 0
+            to: 30
+          - color: '#FFEB3B'
+            from: 30
+            to: 40
+          - color: '#FF9800'
+            from: 40
+            to: 46
+          - color: '#F44336'
+            from: 46
+            to: 60
+        min: 0
+        max: 60
+        height: 34px
+        icon: mdi:heat-wave
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_wind_chill
+            name: Wind Chill
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#B71C1C'
+            from: -40
+            to: -28
+          - color: '#F44336'
+            from: -28
+            to: -18
+          - color: '#FF9800'
+            from: -18
+            to: -10
+          - color: '#2196F3'
+            from: -10
+            to: 0
+          - color: '#4CAF50'
+            from: 0
+            to: 10
+        min: -40
+        max: 10
+        height: 34px
+        icon: mdi:weather-windy
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_vpd_kpa
+            name: VPD kPa (SHT31)
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 6
+        height: 34px
+        icon: mdi:leaf
+        severity:
+          - color: '#2196F3'
+            from: 0
+            to: 1.0
+          - color: '#4CAF50'
+            from: 1.0
+            to: 2.5
+          - color: '#FF9800'
+            from: 2.5
+            to: 4.0
+          - color: '#F44336'
+            from: 4.0
+            to: 6
+  - type: grid
+    icon: mdi:water-percent
+    columns: 3
+    square: false
+    cards:
+      - type: heading
+        heading: Umidità & Punto di Rugiada
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_umidita_relativa
+            name: Relativa %
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#FFEB3B'
+            from: 0
+            to: 30
+          - color: '#4CAF50'
+            from: 30
+            to: 70
+          - color: '#2196F3'
+            from: 70
+            to: 90
+          - color: '#F44336'
+            from: 90
+            to: 100
+        min: 0
+        max: 100
+        height: 34px
+        icon: mdi:water-percent
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_umidita_assoluta
+            name: Assoluta
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 40
+        height: 34px
+        icon: mdi:water
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_punto_di_rugiada
+            name: Punto di Rugiada
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: -30
+            to: 10
+          - color: '#FFEB3B'
+            from: 10
+            to: 22
+          - color: '#FF9800'
+            from: 22
+            to: 26
+          - color: '#F44336'
+            from: 26
+            to: 40
+        min: -30
+        max: 40
+        height: 34px
+        icon: mdi:coolant-temperature
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_umidita_relativa
+            name: SHT31 Rel. %
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#FFEB3B'
+            from: 0
+            to: 30
+          - color: '#4CAF50'
+            from: 30
+            to: 70
+          - color: '#2196F3'
+            from: 70
+            to: 90
+          - color: '#F44336'
+            from: 90
+            to: 100
+        min: 0
+        max: 100
+        height: 34px
+        icon: mdi:water-percent
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_umidita_assoluta
+            name: SHT31 Assoluta
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 40
+        height: 34px
+        icon: mdi:water-opacity
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_punto_rugiada
+            name: SHT31 P. Rugiada
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: -30
+            to: 10
+          - color: '#FFEB3B'
+            from: 10
+            to: 22
+          - color: '#FF9800'
+            from: 22
+            to: 26
+          - color: '#F44336'
+            from: 26
+            to: 40
+        min: -30
+        max: 40
+        height: 34px
+        icon: mdi:water-thermometer
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_punto_brina
+            name: SHT31 P. Brina
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#F44336'
+            from: -40
+            to: -20
+          - color: '#FF5722'
+            from: -20
+            to: -10
+          - color: '#2196F3'
+            from: -10
+            to: 0
+          - color: '#4CAF50'
+            from: 0
+            to: 5
+        min: -40
+        max: 5
+        height: 34px
+        icon: mdi:snowflake-melt
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_wet_bulb
+            name: SHT31 Wet Bulb
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: -20
+        max: 40
+        height: 34px
+        icon: mdi:air-humidifier
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sht31_vpd_kpa
+            name: SHT31 VPD kPa
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 0
+            to: 1
+          - color: '#FFEB3B'
+            from: 1
+            to: 2.5
+          - color: '#FF9800'
+            from: 2.5
+            to: 4
+          - color: '#F44336'
+            from: 4
+            to: 10
+        min: 0
+        max: 10
+        height: 34px
+        icon: mdi:leaf
+  - type: grid
+    icon: mdi:gauge
+    columns: 3
+    square: false
+    cards:
+      - type: heading
+        heading: Pressione & Altitudine
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_pressione_atmosferica
+            name: hPa
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#F44336'
+            from: 950
+            to: 970
+          - color: '#FF9800'
+            from: 970
+            to: 990
+          - color: '#4CAF50'
+            from: 990
+            to: 1025
+          - color: '#FF9800'
+            from: 1025
+            to: 1050
+        min: 950
+        max: 1050
+        height: 34px
+        icon: mdi:gauge
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_pressione_mmhg
+            name: mmHg
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#F44336'
+            from: 713
+            to: 728
+          - color: '#FF9800'
+            from: 728
+            to: 743
+          - color: '#4CAF50'
+            from: 743
+            to: 769
+          - color: '#FF9800'
+            from: 769
+            to: 788
+        min: 713
+        max: 788
+        height: 34px
+        icon: mdi:thermometer-water
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_pressione_bar
+            name: Bar
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#F44336'
+            from: 0.95
+            to: 0.97
+          - color: '#FF9800'
+            from: 0.97
+            to: 0.99
+          - color: '#4CAF50'
+            from: 0.99
+            to: 1.025
+          - color: '#FF9800'
+            from: 1.025
+            to: 1.05
+        min: 0.95
+        max: 1.05
+        height: 34px
+        icon: mdi:gauge-full
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_altitudine_barometrica
+            name: Altitudine
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#B71C1C'
+            from: -400
+            to: -307
+          - color: '#F44336'
+            from: -307
+            to: -98
+          - color: '#FF9800'
+            from: -98
+            to: 192
+          - color: '#4CAF50'
+            from: 192
+            to: 362
+          - color: '#FF9800'
+            from: 362
+            to: 540
+          - color: '#B71C1C'
+            from: 540
+            to: 700
+        min: -400
+        max: 700
+        height: 34px
+        icon: mdi:image-filter-hdr
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_delta_pressione_vs_mare
+            name: ΔP vs Livello Mare
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#F44336'
+            from: -50
+            to: -20
+          - color: '#FF9800'
+            from: -20
+            to: -10
+          - color: '#FFEB3B'
+            from: -10
+            to: -2
+          - color: '#4CAF50'
+            from: -2
+            to: 2
+          - color: '#FFEB3B'
+            from: 2
+            to: 10
+          - color: '#FF9800'
+            from: 10
+            to: 20
+          - color: '#F44336'
+            from: 20
+            to: 50
+        min: -50
+        max: 50
+        height: 34px
+        icon: mdi:delta
+        target: 0
+  - type: grid
+    icon: mdi:weather-windy
+    columns: 3
+    square: false
+    cards:
+      - type: heading
+        heading: Vento — Velocità & Beaufort
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_velocita_vento
+            name: m/s
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 0
+            to: 5.4
+          - color: '#FFEB3B'
+            from: 5.4
+            to: 13.8
+          - color: '#FF9800'
+            from: 13.8
+            to: 24.4
+          - color: '#F44336'
+            from: 24.4
+            to: 33
+        min: 0
+        max: 33
+        height: 34px
+        icon: mdi:weather-windy
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_velocita_vento_km_h
+            name: km/h
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 0
+            to: 19.4
+          - color: '#FFEB3B'
+            from: 19.4
+            to: 49.7
+          - color: '#FF9800'
+            from: 49.7
+            to: 87.8
+          - color: '#F44336'
+            from: 87.8
+            to: 120
+        min: 0
+        max: 120
+        height: 34px
+        icon: mdi:speedometer
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_velocita_vento_nodi
+            name: Nodi
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 0
+            to: 10.5
+          - color: '#FFEB3B'
+            from: 10.5
+            to: 26.8
+          - color: '#FF9800'
+            from: 26.8
+            to: 47.4
+          - color: '#F44336'
+            from: 47.4
+            to: 64
+        min: 0
+        max: 64
+        height: 34px
+        icon: mdi:boat
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_scala_beaufort
+            name: Scala Bft
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 0
+            to: 3
+          - color: '#FFEB3B'
+            from: 3
+            to: 6
+          - color: '#FF9800'
+            from: 6
+            to: 9
+          - color: '#F44336'
+            from: 9
+            to: 12
+        min: 0
+        max: 12
+        height: 34px
+        icon: mdi:windsock
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_beaufort_nome
+        name: Nome Beaufort
+        icon: mdi:windsock
+        layout: horizontal
+      - type: entities
+        title: Beaufort — Descrizione
+        icon: mdi:windsock
+        show_header_toggle: false
+        entities:
+          - entity: sensor.stazione_meteo_esterna_beaufort_descrizione
+            name: Descrizione
+            icon: mdi:text-long
+  - type: grid
+    icon: mdi:compass-rose
+    columns: 1
+    square: false
+    cards:
+      - type: heading
+        heading: Rosa dei Venti
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:windrose-card
+        title: Distribuzione Direzione / Velocità
+        data_period:
+          period_back: -24h
+        rose_config:
+          windrose_draw_north_offset: 0
+          center_circle:
+            enabled: false
+            text: ${calm-percentage}%
+        refresh_interval: 500
+        windspeed_bar_location: bottom
+        wind_direction_entity:
+          entity: sensor.stazione_meteo_esterna_heading_gradi
+          use_statistics: true
+          direction_compensation: 0
+        windspeed_entities:
+          - entity: sensor.stazione_meteo_esterna_velocita_vento
+            name: Velocità vento
+            speed_unit: kph
+            use_statistics: true
+            windspeed_bar_full: false
+            output_speed_unit: kph
+            speed_range_beaufort: true
+            current_speed_arrow: true
+        buttons_config:
+          location: bottom
+          buttons:
+            - type: period_selector
+              button_text: Oggi
+              preset_period: today
+            - type: period_selector
+              button_text: Ultimi 7 giorni
+              preset_period: last_7_days
+            - type: period_selector
+              button_text: Ultimi 30 giorni
+              preset_period: last_30_days
+              use_statistics: true
+              statistics_period: 5minute
+        direction_labels:
+          cardinal_direction_letters: NESO
+        current_direction:
+          show_arrow: true
+        matching_strategy:
+          name: speed-first
+        corner_info:
+          top_left:
+            label: Direzione vento
+            unit: ' °'
+            entity: sensor.stazione_meteo_esterna_heading_gradi
+          top_right:
+            label: Velocità vento
+            unit: ' km/h'
+            entity: sensor.stazione_meteo_esterna_velocita_vento_km_h
+            input_unit: kph
+            output_unit: kph
+        text_blocks:
+          top:
+            text: |-
+              <table>
+                  <tr>
+                      <td>Periodo:</td><td>${start-date}, ${start-time} - ${end-date}, ${end-time}</td>
+                  </tr>
+              </table>
+  - type: grid
+    icon: mdi:compass
+    columns: 3
+    square: false
+    cards:
+      - type: heading
+        heading: Vento — Direzione & AS5600
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_heading_gradi
+            name: Heading (°)
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 359
+        height: 34px
+        icon: mdi:compass-outline
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_heading_3_cifre
+        name: Heading 3 Cifre
+        icon: mdi:numeric-3-box
+        layout: horizontal
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_quadrante_8_venti
+        name: 8 Venti
+        icon: mdi:compass-rose
+        layout: horizontal
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_quadrante_16_venti
+        name: 16 Venti
+        icon: mdi:compass-rose
+        layout: horizontal
+  - type: grid
+    icon: mdi:magnet
+    columns: 2
+    square: false
+    cards:
+      - type: heading
+        heading: Anemometro — Sensore Hall
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_hall_periodo
+            name: Periodo (µs)
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 100000
+        height: 34px
+        icon: mdi:timeline-clock
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_impulsi_conteggiati
+            name: Impulsi Totali
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 100000
+        height: 34px
+        icon: mdi:pulse
+  - type: grid
+    icon: mdi:sunglasses
+    columns: 3
+    square: false
+    cards:
+      - type: heading
+        heading: Luce & UV (LTR390)
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_uv_level
+        name: UV Level
+        icon: mdi:sun-alert
+        layout: horizontal
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_luce_classe
+        name: Classe Luminosa
+        icon: mdi:lightbulb-on
+        layout: horizontal
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_gain_ltr390
+        name: Gain LTR390
+        icon: mdi:tune
+        layout: horizontal
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_risoluzione_ltr390
+        name: Risoluzione LTR
+        icon: mdi:target
+        layout: horizontal
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_integrazione_ltr390
+            name: Integrazione (ms)
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 600
+        height: 34px
+        icon: mdi:timelapse
+  - type: grid
+    icon: mdi:weather-rainy
+    columns: 3
+    square: false
+    cards:
+      - type: heading
+        heading: Pioggia — Bascula Hall
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_pioggia_evento_reset
+            name: Evento mm
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#4CAF50'
+            from: 0
+            to: 0.1
+          - color: '#2196F3'
+            from: 0.1
+            to: 5
+          - color: '#00BCD4'
+            from: 5
+            to: 20
+          - color: '#FF9800'
+            from: 20
+            to: 50
+          - color: '#F44336'
+            from: 50
+            to: 500
+        min: 0
+        max: 200
+        height: 34px
+        icon: mdi:weather-pouring
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_pioggia_totale_storica
+            name: Totale Storico
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 2000
+        height: 34px
+        icon: mdi:weather-rainy
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_intensita_pioggia
+            name: Intensità mm/h
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        severity:
+          - color: '#ECEFF1'
+            from: 0
+            to: 0.1
+          - color: '#4CAF50'
+            from: 0.1
+            to: 2
+          - color: '#2196F3'
+            from: 2
+            to: 10
+          - color: '#FF9800'
+            from: 10
+            to: 50
+          - color: '#F44336'
+            from: 50
+            to: 500
+        min: 0
+        max: 100
+        height: 34px
+        icon: mdi:weather-rainy
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_conteggio_tick_bascula
+            name: Tick Bascula
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 100000
+        height: 34px
+        icon: mdi:counter
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_mm_per_tick_calibrato
+            name: mm / Tick
+        positions:
+          icon: outside
+          indicator: inside
+          name: outside
+          value: inside
+        min: 0
+        max: 5
+        height: 34px
+        icon: mdi:ruler
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_classe_intensita_wmo
+        name: Classe WMO
+        icon: mdi:signal-distance-variant
+        layout: horizontal
+      - type: custom:mushroom-entity-card
+        entity: sensor.stazione_meteo_esterna_sec_ultimo_tick_pioggia
+        name: Ultimo Tick (s)
+        icon: mdi:clock-outline
+        layout: horizontal
+  - type: grid
+    icon: mdi:chart-timeline-variant
+    columns: 2
+    square: false
+    cards:
+      - type: heading
+        heading: Pioggia — Andamenti Ultime 24 Ore
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_pioggia_evento_reset
+            name: Evento mm
+        name: Pioggia Evento (Cumulata)
+        icon: mdi:weather-pouring
+        hours_to_show: 24
+        points_per_hour: 6
+        line_width: 2
+        animate: true
+        show:
+          legend: true
+          fill: fade
+          extrema: true
+          labels: false
+          name: true
+          icon: true
+          state: true
+        color_thresholds:
+          - value: 0
+            color: '#ECEFF1'
+          - value: 0.1
+            color: '#4CAF50'
+          - value: 2
+            color: '#2196F3'
+          - value: 10
+            color: '#FF9800'
+          - value: 50
+            color: '#F44336'
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stazione_meteo_esterna_intensita_pioggia
+            name: mm/h
+        name: Intensità Pioggia
+        icon: mdi:weather-rainy
+        hours_to_show: 24
+        points_per_hour: 12
+        line_width: 2
+        animate: true
+        show:
+          legend: true
+          fill: fade
+          extrema: true
+          labels: false
+          name: true
+          icon: true
+          state: true
+        color_thresholds:
+          - value: 0
+            color: '#ECEFF1'
+          - value: 0.1
+            color: '#4CAF50'
+          - value: 2
+            color: '#2196F3'
+          - value: 10
+            color: '#FF9800'
+          - value: 50
+            color: '#F44336'
+  - type: grid
+    icon: mdi:chip
+    columns: 2
+    square: false
+    cards:
+      - type: heading
+        heading: Diagnostica — Dati Raw & Stato Sensori
+        card_mod:
+          style: 'ha-card { border-left: 4px solid #03A9F4; padding-left: 12px; }'
+      - type: entities
+        title: LTR390 — Conteggi Raw
+        icon: mdi:sun-wireless-outline
+        show_header_toggle: false
+        entities:
+          - entity: sensor.stazione_meteo_esterna_ltr390_als_raw_visibile
+            name: ALS Raw (Visibile)
+            icon: mdi:sun-wireless-outline
+          - entity: sensor.stazione_meteo_esterna_ltr390_uv_raw_count
+            name: UV Raw Count
+            icon: mdi:sun-wireless
+      - type: entities
+        title: AS5600 & Stato Sensori
+        icon: mdi:magnet-on
+        show_header_toggle: false
+        entities:
+          - entity: sensor.stazione_meteo_esterna_compass_raw
+            name: AS5600 Raw Count (0..4095)
+            icon: mdi:numeric
+          - type: divider
+          - entity: sensor.stazione_meteo_esterna_impulsi_conteggiati
+            name: Anemometro — Impulsi Conteggiati
+            icon: mdi:counter
+          - entity: sensor.stazione_meteo_esterna_sec_ultimo_tick_pioggia
+            name: Pioggia — Età Ultimo Tick
+            icon: mdi:clock-outline
+          - type: divider
+          - entity: sensor.stazione_meteo_esterna_sensor_status_bitmask
+            name: Stato Sensori Bitmask
+            icon: mdi:bit
+      - type: entities
+        title: Stato Sensori
+        icon: mdi:bitset
+        show_header_toggle: false
+        entities:
+          - entity: sensor.stazione_meteo_esterna_sensori_collegati
+            name: Sensori Collegati
+            icon: mdi:connection
+          - type: divider
+          - entity: sensor.stazione_meteo_esterna_sensor_status_bitmask
+            name: Bitmask (uint32)
+            icon: mdi:bit
+          - entity: sensor.stazione_meteo_esterna_stato_sensori_hex_bin
+            name: HEX / BIN
+            icon: mdi:code-tags
+cards: []

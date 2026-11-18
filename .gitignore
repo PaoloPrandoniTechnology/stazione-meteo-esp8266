@@ -1,0 +1,5 @@
+.pio/
+.vscode/
+firmware_output/
+*.bin
+include/secrets.h
